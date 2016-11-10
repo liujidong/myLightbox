@@ -2,12 +2,12 @@
 		   
 	var LightBox = function(){
 		var self = this;
-		//´´½¨ÕÚÕÖºÍµ¯³ö´°
+		//åˆ›å»ºé®ç½©å’Œå¼¹å‡ºçª—
 		this.popupMask = $('<div id="G-lightbox-mask">');
 		this.popupWin = $('<div id="G-lightbox-popup">');
-		//±£´æbody
+		//ä¿å­˜body
 		this.bodyNode=$(document.body);
-		//äÖÈ¾Ê£ÓàµÄdom£¬²¢¼ÓÈëµ½body
+		//æ¸²æŸ“å‰©ä½™çš„domï¼Œå¹¶åŠ å…¥åˆ°body
 		this.renderDOM();
 	};
 	LightBox.prototype={
@@ -19,14 +19,14 @@
 						'</div>'+
 						'<div class="lightbox-pic-caption">'+
 							'<div class="lightbox-caption-area">'+
-								'<p class="lightbox-pic-desc">Í¼Æ¬±êÌâ</p>'+
-								'<span class="lightbox-of-index">µ±Ç°Ë÷Òı£º0 of 0 </span>'+
+								'<p class="lightbox-pic-desc">å›¾ç‰‡æ ‡é¢˜</p>'+
+								'<span class="lightbox-of-index">å½“å‰ç´¢å¼•ï¼š0 of 0 </span>'+
 							'</div>'+
 							'<span class="lightbox-close-btn"></span>'+
 						'</div>';
-			//²åÈëµ½this.popupWin
+			//æ’å…¥åˆ°this.popupWin
 			this.popupWin.html(strDom);
-			//°ÑÕÚÕÖºÍµ¯³ö¿ò²åÈëµ½body
+			//æŠŠé®ç½©å’Œå¼¹å‡ºæ¡†æ’å…¥åˆ°body
 			this.bodyNode.append(this.popupMask,this.popupWin);
 			}
 	};		
