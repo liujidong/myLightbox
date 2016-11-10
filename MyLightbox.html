@@ -8,14 +8,14 @@
   <META NAME="Description" CONTENT="">
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
   <link rel="stylesheet" type="text/css" href="lightbox.css">
-  <script type="text/javascrpt" src="jquery.js"></script>
-  <script type="text/javascript" src="ligthbox.js"></script>
+  <script type="text/javascript" src="jquery-3.1.1.js"></script>
+  <script type="text/javascript" src="lightbox.js"></script>
  </HEAD>
 
  <BODY>
-	<!-- 遮罩 -->
-  <div id="G-lightbox-mask"></div>
-  <!-- 弹出层 -->
+	<!-- 遮罩 
+  <div id="G-lightbox-mask"></div> -->
+  <!-- 弹出层 
   <div id="G-lightbox-popup">
 	<div class="lightbox-pic-view">
 		<span class="lightbox-btn lightbox-prev-btn lightbox-prev-btn-show"></span>
@@ -30,5 +30,11 @@
 		<span class="lightbox-close-btn"></span>
 	</div>
   </div>
+  -->
+  <script>
+  $(function(){
+  	var lightbox = new LightBox();
+  });
+  </script>
  </BODY>
 </HTML>
