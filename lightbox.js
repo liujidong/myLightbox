@@ -8,9 +8,40 @@
 		//保存body
 		this.bodyNode=$(document.body);
 		//渲染剩余的dom，并加入到body
-		this.renderDOM();
+		//this.renderDOM();
+		//准备开发事件委托，获得组数据
+		this.groupName=null;
+		this.groupData=[];	//放置同一组数据
+		this.bodyNode.delegate(".js-lightbox,*[data-role=lightbox]","click",function(e){
+			//alert(this);
+			//阻止事件冒泡
+			e.stopPropagation();
+			var currentGroupName=$(this).attr("data-group");
+			if(currentGroupName != self.groupName){
+				self.groupName=currentGroupName;
+				//alert(currentGroupName);
+				//根据当前组名获取同一组数据
+				self.getGroup();
+			}
+		});
 	};
 	LightBox.prototype={
+		getGroup:function(){
+			var self = this;
+			//根据当前组名获取同一组数据
+			var groupList = this.bodyNode.find("*[data-group="+this.groupName+"]");
+			//alert(groupList.length);
+			//清空
+			self.groupData.length=0;
+			groupList.each(function(){
+				self.groupData.push({
+									src:$(this).attr("data-source"),
+									id:$(this).attr("data-id"),
+									caption:$(this).attr("data-caption")
+									});
+			});
+			console.log(self.groupData);
+		},
 		renderDOM:function(){
 			var strDom='<div class="lightbox-pic-view">'+
 							'<span class="lightbox-btn lightbox-prev-btn"></span>'+
