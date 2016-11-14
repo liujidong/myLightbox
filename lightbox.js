@@ -8,7 +8,18 @@
 		//保存body
 		this.bodyNode=$(document.body);
 		//渲染剩余的dom，并加入到body
-		//this.renderDOM();
+		this.renderDOM();
+		
+		this.picViewArea=this.popupWin.find("div.lightbox-pic-view");//图片预览区域
+		this.popupPic = this.popupWin.find("img.lightbox-image");//图片
+		this.picCaptionArea = this.popupWin.find("div.lightbox-pic-caption");//图片描述区域
+		this.nextBtn = this.popupWin.find("span.lightbox-next-btn");
+		this.prevBtn = this.popupWin.find("span.lightbox-prev-btn");
+		
+		this.captionText = this.popupWin.find("p.lightbox-pic-desc");//图片描述
+		this.currentIndex = this.popupWin.find("span.lightbox-of-index");//图片当前索引
+		this.closeBtn = this.popupWin.find("span.lightbox-close-btn");//关闭按钮
+		
 		//准备开发事件委托，获得组数据
 		this.groupName=null;
 		this.groupData=[];	//放置同一组数据
@@ -59,7 +70,46 @@
 			this.popupWin.html(strDom);
 			//把遮罩和弹出框插入到body
 			this.bodyNode.append(this.popupMask,this.popupWin);
-			}
+		},
+		showMaskAndPopup:function(sourceSrc,currentId){
+			var self = this;
+			
+			this.popupPic.hide();
+			this.picCaptionArea.hide();
+			
+			this.popupMask.fadeIn();
+			
+			var winWidth=$(window).width(),
+			    winHeight = $(window).height();
+				
+			this.picViewArea.css({
+								 width:winWidth/2,
+								 height:winHeight/2
+								 });
+			this.popupWin.fadeIn();
+			
+			var viewHeight = winHeight/2+10;
+			
+			this.popupWin.css({
+							  width:winWidth/2+10,
+							  height:winHeight/2+10,
+							  marginLeft:-(winWidth/2+10)/2
+							  });
+			//根据当前点击的元素ID获取在当前组别里面的索引
+			this.index = this.getIndexOf(currentId);
+			//console.log
+		},
+		getIndexOf:function(currentId){
+			var index = 0;
+			
+			$(this.groupData).each(function(i){
+               index ++;
+			    if(this.id===currentId){
+					return false;
+				}
+			});
+			return index;
+		}
 	};		
 	window["LightBox"]=LightBox;
 })(jQuery);
