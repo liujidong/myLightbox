@@ -27,7 +27,7 @@ body{font:12px/1.5 '微软雅黑',tahoma,arial,'Hiragino Sans GB',宋体,sans-se
 #G-lightbox-popup .lightbox-pic-view .lightbox-next-btn-show{background:url(icon/next.png) no-repeat right center;cursor:pointer;}
 #G-lightbox-popup .lightbox-pic-view .lightbox-image{display:block}
 
-#G-lightbox-popup .lightbox-pic-caption{position:relative;margin:0 5px;margin-top:-60px;background-color:rgba(0,0,0,0.5);}
+#G-lightbox-popup .lightbox-pic-caption{position:relative;z-index:2;margin:0 5px;margin-top:-60px;background-color:rgba(0,0,0,0.5);}
 #G-lightbox-popup .lightbox-pic-caption .lightbox-caption-area{padding:10px 5px;color:#fff;}
 
 #G-lightbox-popup .lightbox-pic-caption .lightbox-caption-area .lightbox-of-index{color:#999;}

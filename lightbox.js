@@ -35,8 +35,107 @@
 				self.getGroup();
 			}
 		});
+		//初始化弹出
+		//self.initPopup($(this));
+		//关闭弹出
+		this.popupMask.click(function(){
+			$(this).fadeOut();
+			self.popupWin.fadeOut();
+		});
+		this.closeBtn.click(function(){
+			self.popupMask.fadeOut();
+			self.popupWin.fadeOut();
+		});
+		//绑定上下切换按钮事件
+		this.flag = true;
+		this.nextBtn.hover(function(){
+									if(!$(this).hasClass("disabled") && self.groupData.length > 1){
+										$(this).addClass("lightbox-next-btn-show");
+									}
+								},function(){
+									if(!$(this).hasClass("disabled") && self.groupData.length > 1){
+										$(this).removeClass("lightbox-next-btn-show");
+									}									
+								}).click(function(e){
+									if(!$(this).hasClass("disabled")&&self.flag){
+										self.flag=false;
+										e.stopPropagation();
+										self.goto("next");
+										}
+									});
+		this.prevBtn.hover(function(){
+									if(!$(this).hasClass("disabled") && self.groupData.length > 1){
+										$(this).addClass("lightbox-prev-btn-show");
+									}
+								},function(){
+									if(!$(this).hasClass("disabled") && self.groupData.length > 1){
+										$(this).removeClass("lightbox-prev-btn-show");
+									}									
+								}).click(function(e){
+									if(!$(this).hasClass("disabled")&&self.flag){
+										self.flag=false;
+										e.stopPropagation();
+										self.goto("prev");
+										}
+									});;		
 	};
 	LightBox.prototype={
+		goto:function(dir){
+			if(dir==="next"){
+				//this.groupData
+				//this.index
+				this.index++;
+				if(this.index >= this.groupData.length-1){
+					this.nextBtn.addClass("disabled").removeClass("lightbox-next-show");
+				}
+				if(this.index != 0){
+					this.prevBtn.removeClass("disabled");
+				}
+				
+				var src=this.groupData[this.index].src;
+				//console.log(this.index);
+				this.loadPicSize(src);
+			}else if(dir==="prev"){
+				this.index--;
+				if(this.index<=0){
+					this.prevBtn.addClass("disabled").removeClass("lightbox-prev-show");
+				}
+				if(this.index != this.groupData.length-1){
+					this.nextBtn.removeClass("disabled");
+				}
+				var src=this.groupData[this.index].src;
+				this.loadPicSize(src);
+			}
+		},
+		loadPicSize:function(sourceSrc){
+			var self = this;
+			self.popupPic.css({width:"auto",height:"auto"}).hide();
+			
+			this.preLoadImg(soureSrc,function(){
+				self.puppupPic.attr("src",sourceSrc);
+				var picWidth = self.popupPic.width(),
+					picHeight = self.popupPic.height();
+				self.changePic(picWidth,picHeight);
+			});
+		},
+		changePic:function(){
+			var self = this,
+				winWidth = $(window).width(),
+				winHeight = $(window).height();
+			this.popupWin.animate({
+								  width:width,
+								  height:height,
+								  marginLeft:(width/2),
+								  top:(winHeight-height)/2
+								  },function(){
+									  self.popupPic.css({
+														width:width-10,
+														height:height-10
+														}).fadeIn();
+									  self.picCaptionArea.fadeIn();
+									  self.flag=true;
+									  });				
+		},
 		getGroup:function(){
 			var self = this;
 			//根据当前组名获取同一组数据
