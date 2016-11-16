@@ -15,9 +15,9 @@ body{font:12px/1.5 '微软雅黑',tahoma,arial,'Hiragino Sans GB',宋体,sans-se
 .text-ellipsis{white-space:nowrap;/*设置不换行*/text-overflow:ellipsis;/**/-o-text-overflow:ellipsis;/*兼容opera*/overflow:hidden;}
 /*设置超过的隐藏*/
 /*lightbox图片画廊样式*/
-#G-lightbox-mask{position:fixed;left:0;top:0;width:100%;height:100%;background-color:#000;opacity:0.5;fliter:alpha(opacity=50%);z-index:10000}
+#G-lightbox-mask{position:fixed;left:0;top:0;width:100%;height:100%;background-color:#000;opacity:0.5;fliter:alpha(opacity=50%);z-index:10000;display:none}
 
-#G-lightbox-popup{position:fixed;left:50%;top:50px;margin-left:-200px;width:400px;z-index:10001}
+#G-lightbox-popup{position:fixed;left:50%;top:50px;margin-left:-200px;width:400px;z-index:10001;display:none}
 
 #G-lightbox-popup .lightbox-pic-view{position:relative;border:5px solid #fff;border-radius:3px;background:#fff url(icon/loading.gif) no-repeat center center;overflow:hidden;}
 #G-lightbox-popup .lightbox-pic-view .lightbox-btn{position:absolute;top:0;width:40%;height:100%;z-index:1;}
