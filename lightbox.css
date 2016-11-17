@@ -31,4 +31,4 @@ body{font:12px/1.5 '微软雅黑',tahoma,arial,'Hiragino Sans GB',宋体,sans-se
 #G-lightbox-popup .lightbox-pic-caption .lightbox-caption-area{padding:10px 5px;color:#fff;}
 
 #G-lightbox-popup .lightbox-pic-caption .lightbox-caption-area .lightbox-of-index{color:#999;}
-#G-lightbox-popup .lightbox-pic-caption .lightbox-close-btn{position:absolute;right:10px;top:13px;width:27px;background:url(icon/close.png) no-repeat center center;}
+#G-lightbox-popup .lightbox-pic-caption .lightbox-close-btn{position:absolute;right:10px;top:13px;width:27px;height:27px;background:url(icon/close.png) no-repeat center center;}
