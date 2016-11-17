@@ -87,7 +87,7 @@
 				//this.index
 				this.index++;
 				if(this.index >= this.groupData.length-1){
-					this.nextBtn.addClass("disabled").removeClass("lightbox-next-show");
+					this.nextBtn.addClass("disabled").removeClass("lightbox-next-btn-show");
 				}
 				if(this.index != 0){
 					this.prevBtn.removeClass("disabled");
@@ -99,7 +99,7 @@
 			}else if(dir==="prev"){
 				this.index--;
 				if(this.index<=0){
-					this.prevBtn.addClass("disabled").removeClass("lightbox-prev-show");
+					this.prevBtn.addClass("disabled").removeClass("lightbox-prev-btn-show");
 				}
 				if(this.index != this.groupData.length-1){
 					this.nextBtn.removeClass("disabled");
