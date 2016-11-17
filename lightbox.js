@@ -42,10 +42,12 @@
 		this.popupMask.click(function(){
 			$(this).fadeOut();
 			self.popupWin.fadeOut();
+			self.clear=false;
 		});
 		this.closeBtn.click(function(){
 			self.popupMask.fadeOut();
 			self.popupWin.fadeOut();
+			self.clear = false;
 		});
 		//绑定上下切换按钮事件
 		this.flag = true;
@@ -78,7 +80,20 @@
 										e.stopPropagation();
 										self.goto("prev");
 										}
-									});;		
+									});
+		//绑定窗口调整事件
+		var timer = null;
+		this.clear = false;
+		$(window).resize(function(){
+			//alert(this.clear+","+self.clear);								 
+			if(self.clear){
+				window.clearTimeout(timer);
+				timer = window.setTimeout(function(){
+					self.loadPicSize(self.groupData[self.index].src);		
+					//alert("resize");
+				},500);						
+			}
+		});
 	};
 	LightBox.prototype={
 		goto:function(dir){
@@ -111,7 +126,7 @@
 		loadPicSize:function(sourceSrc){
 			var self = this;
 			self.popupPic.css({width:"auto",height:"auto"}).hide();
-			
+			this.picCaptionArea.hide();
 			this.preLoadImg(sourceSrc,function(){
 				self.popupPic.attr("src",sourceSrc);
 				var picWidth = self.popupPic.width(),
@@ -160,6 +175,8 @@
 														}).fadeIn();
 									  self.picCaptionArea.fadeIn();
 									  self.flag=true;
+									  self.clear = true;
+									  //alert(this.clear);
 									  });
 			//设置描述文字和索引
 			//console.log(this.index);
