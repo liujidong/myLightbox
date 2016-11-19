@@ -1,7 +1,11 @@
 ;(function($){
 		   
-	var LightBox = function(){
+	var LightBox = function(settings){
 		var self = this;
+		this.settings = {
+			speed:500
+			};
+		$.extend(this.settings,settings||{});
 		//创建遮罩和弹出窗
 		this.popupMask = $('<div id="G-lightbox-mask">');
 		this.popupWin = $('<div id="G-lightbox-popup">');
@@ -93,6 +97,16 @@
 					//alert("resize");
 				},500);						
 			}
+		}).keyup(function(e){
+			var keyValue=e.which;
+			//console.log(keyValue);
+			if(self.clear){
+				if(keyValue==38 || keyValue==37){
+					self.prevBtn.click();
+				}else if(keyValue==40 || keyValue==39){
+					self.nextBtn.click();
+				}
+			}
 		});
 	};
 	LightBox.prototype={
@@ -162,13 +176,13 @@
 			this.picViewArea.animate({
 									 width:width-10,
 									 height:height-10
-									 });				
+									 },self.settings.speed);				
 			this.popupWin.animate({
 								  width:width,
 								  height:height,
 								  marginLeft:-(width/2),
 								  top:(winHeight-height)/2
-								  },function(){
+								  },self.settings.speed,function(){
 									  self.popupPic.css({
 														width:width-10,
 														height:height-10
@@ -249,7 +263,7 @@
 							  top:-viewHeight
 							  }).animate({
 								  top:(winHeight-viewHeight)/2
-								},function(){
+								},self.settings.speed,function(){
 										//加载图片
 										self.loadPicSize(sourceSrc);
 										});
