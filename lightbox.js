@@ -85,6 +85,8 @@
 										self.goto("prev");
 										}
 									});
+		//判断是不是IE6
+		this.isIE6 = /MSIE 6.0/gi.test(window.navigator.userAgent);
 		//绑定窗口调整事件
 		var timer = null;
 		this.clear = false;
@@ -95,7 +97,13 @@
 				timer = window.setTimeout(function(){
 					self.loadPicSize(self.groupData[self.index].src);		
 					//alert("resize");
-				},500);						
+				},500);	
+				if(self.isIE6){
+					self.popupMask.css({
+						width:$(window).width(),
+						height:$(window).height()
+					});
+				}
 			}
 		}).keyup(function(e){
 			var keyValue=e.which;
@@ -108,6 +116,14 @@
 				}
 			}
 		});
+		//alert(this.isIE6);
+		//如果是IE6
+		if(this.isIE6){
+			$(window).scroll(function(){
+				self.popupMask.css("top",$(window).scrollTop());
+				//self.popupWin.css("top",$(window).scrollTop());
+			});
+		}
 	};
 	LightBox.prototype={
 		goto:function(dir){
@@ -176,12 +192,16 @@
 			this.picViewArea.animate({
 									 width:width-10,
 									 height:height-10
-									 },self.settings.speed);				
+									 },self.settings.speed);
+			var top = (winHeight-height)/2;
+			if(this.isIE6){
+				top +=$(window).scrollTop();
+			}
 			this.popupWin.animate({
 								  width:width,
 								  height:height,
 								  marginLeft:-(width/2),
-								  top:(winHeight-height)/2
+								  top:top
 								  },self.settings.speed,function(){
 									  self.popupPic.css({
 														width:width-10,
@@ -217,7 +237,7 @@
 									caption:$(this).attr("data-caption")
 									});
 			});
-			console.log(self.groupData);
+			//console.log(self.groupData);
 		},
 		renderDOM:function(){
 			var strDom='<div class="lightbox-pic-view">'+
@@ -243,7 +263,7 @@
 			this.popupPic.hide();
 			this.picCaptionArea.hide();
 			
-			this.popupMask.fadeIn();
+			//this.popupMask.fadeIn();
 			
 			var winWidth=$(window).width(),
 			    winHeight = $(window).height();
@@ -252,17 +272,25 @@
 								 width:winWidth/2,
 								 height:winHeight/2
 								 });
+			if(this.isIE6){
+				var scrollTop = $(window).scrollTop();
+				this.popupMask.css({
+					width:winWidth,
+					height:winHeight
+				});
+			}
+			this.popupMask.fadeIn();
 			this.popupWin.fadeIn();
 			
 			var viewHeight = winHeight/2+10;
-			
+			var topAnimate = (winHeight-viewHeight)/2;
 			this.popupWin.css({
 							  width:winWidth/2+10,
 							  height:winHeight/2+10,
 							  marginLeft:-(winWidth/2+10)/2,
-							  top:-viewHeight
+							  top:(this.isIE6?-(viewHeight+scrollTop):-viewHeight)
 							  }).animate({
-								  top:(winHeight-viewHeight)/2
+								  top:(this.isIE6?(topAnimate+scrollTop):topAnimate)
 								},self.settings.speed,function(){
 										//加载图片
 										self.loadPicSize(sourceSrc);
