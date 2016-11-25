@@ -312,6 +312,9 @@
 					this.nextBtn.removeClass("disabled");
 					this.prevBtn.removeClass("disabled");					
 				}
+			}else{
+				this.prevBtn.addClass("disabled");
+				this.nextBtn.addClass("disabled");
 			}
 		},
 		getIndexOf:function(currentId){
